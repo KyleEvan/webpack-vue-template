@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --config webpack.dev.js --mode development",
     "build": "webpack --config webpack.prod.js --mode production",
-    "preview": "npm run build && http-server dist",
-    "kickstart": "node kickstarter"
+    "preview": "npm run build && http-server dist"
   },
   "repository": {
     "type": "git",
@@ -40,7 +39,9 @@
   },
   "homepage": "https://github.com/lifenautjoe/webpack-starter-basic#readme",
   "dependencies": {
-    "normalize.css": "^8.0.0"
+    "babel-polyfill": "^6.26.0",
+    "normalize.css": "^8.0.0",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "ajv": "^6.3.0",
@@ -65,12 +66,11 @@
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
+    "vue-loader": "^15.7.0",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"
-  },
-  "kickstartDependencies": [
-    "inquirer",
-    "rimraf"
-  ]
+  }
 }

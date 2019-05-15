@@ -1,8 +1,9 @@
 const path = require('path');
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    mode: 'development',
     devtool: 'eval-cheap-module-source-map',
     entry: './src/index.js',
     devServer: {
@@ -14,6 +15,10 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -27,7 +32,7 @@ module.exports = {
                 use: [
                     {
                         // creates style nodes from JS strings
-                        loader: "style-loader",
+                        loader: "vue-style-loader",
                         options: {
                             sourceMap: true
                         }
@@ -50,8 +55,7 @@ module.exports = {
                     }
                     // Please note we are not running postcss here
                 ]
-            }
-            ,
+            },
             {
                 // Load all images as base64 encoding if they are smaller than 8192 bytes
                 test: /\.(png|jpg|gif)$/,
@@ -67,11 +71,18 @@ module.exports = {
                 ]
             }
         ],
+
+    },
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
+      }
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './index.html',
             inject: true
-        })
+        }),
+        new VueLoaderPlugin()
     ]
 };
